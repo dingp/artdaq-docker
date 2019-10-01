@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  artdaq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "/tmp:/tmp"
+    environment:
+      - DISPLAY
+    network_mode: host
+    image: dingpf/artdaq:latest
+    stdin_open: true
+    tty: true
+    privileged: true

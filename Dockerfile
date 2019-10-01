@@ -68,5 +68,4 @@ ENV TERM=xterm
 #ENV USER=artdaq
 ENV USER=root
 
-
 ENTRYPOINT ["/bin/bash"]
