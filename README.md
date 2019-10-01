@@ -1,6 +1,11 @@
 # artdaq-docker
 
-This docker image has been tested with podman under RHEL8. If you are using Scientific Linux 7.6 or above, you can install podman with `sudo yum -y install yum-conf-extras` followed by `sudo yum -y install podman`.
+This docker image has been tested with podman under RHEL8. If you are using Scientific Linux 7.6 or above, you can install podman with:
+
+```sh
+sudo yum -y install yum-conf-extras
+sudo yum -y install podman
+```
 
 Assuming you have a `/scratch` directory on your host OS and the user you logged in as have read/write access to it, you can start the container with (otherwise, change the volume mount to the full path to another directory you have read/write access to):
 
