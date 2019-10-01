@@ -13,7 +13,7 @@ Assuming you have a `/scratch` directory on your host OS and the user you logged
 podman run  --privileged=true  -ti -e DISPLAY  --rm  -v /scratch:/scratch --net=host  dingpf/artdaq
 ```
 
-In the container, you can do the following to run `artdaq-demo` (using `artdaq-demo v3_06_01` as an example:
+In the container, you can do the following to run `artdaq-demo` (using `artdaq-demo v3_06_01` as an example):
 
 ```sh
 cd /scratch
