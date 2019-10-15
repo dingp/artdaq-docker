@@ -43,7 +43,7 @@ RUN yum clean all \
  && yum clean all
 
 RUN yum clean all \
- && yum -y install  libxkbcommon-devel glew-devel \
+ && yum -y install  libxkbcommon-devel glew-devel unzip perl-ExtUtils-Embed \
  && yum clean all
 
 ENV UPS_OVERRIDE="-H Linux64bit+3.10-2.17"
