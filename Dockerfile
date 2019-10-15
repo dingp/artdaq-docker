@@ -43,7 +43,7 @@ RUN yum clean all \
  && yum clean all
 
 RUN yum clean all \
- && yum -y install  libxkbcommon-devel \
+ && yum -y install  libxkbcommon-devel glew-devel \
  && yum clean all
 
 ENV UPS_OVERRIDE="-H Linux64bit+3.10-2.17"
@@ -59,16 +59,17 @@ ENV TERM=xterm
 # Create an artdaq user (UID and GID should match the Mac user), add to suoders, and switch to it
 #ENV USERNAME=artdaq
 
-#ARG MYUID
-#ENV MYUID=502
-#ARG MYGID
-#ENV MYGID=20
+ARG MYUID
+ENV MYUID=502
+ARG MYGID
+ENV MYGID=20
 
-#RUN useradd -u $MYUID -g $MYGID -M $USERNAME && \
-#      echo "$USERNAME ALL=(ALL)   NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd -u $MYUID -g $MYGID -M artdaq && \
+      echo "$USERNAME ALL=(ALL)   NOPASSWD:ALL" >> /etc/sudoers
 
-#USER $USERNAME
+#USER artdaq
 #ENV USER=artdaq
+USER root
 ENV USER=root
 
 ENTRYPOINT ["/bin/bash"]
