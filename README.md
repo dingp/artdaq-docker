@@ -1,5 +1,8 @@
 # artdaq-docker
 
+![docker-publish workflow](https://github.com/dingp/artdaq-docker/actions/workflows/docker-publish.yml/badge.svg)
+
+
 This docker image has been tested with podman under RHEL8. If you are using Scientific Linux 7.6 or above, you can install podman with:
 
 ```sh
