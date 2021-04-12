@@ -10,9 +10,9 @@ on:
     inputs:
       name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
+        description: 'Manual start the CI workflow'
         # Default value if no value is explicitly provided
-        default: 'World'
+        default: 'Yes'
         # Input has to be provided for the workflow to run
         required: true
 
@@ -31,8 +31,8 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+    - name: Start the CI
+      run: echo "Start the CI anyway ${{ github.event.inputs.name }}"
 
     - name: Checkout daq-buildtools
       uses: actions/checkout@v2
@@ -48,8 +48,6 @@ jobs:
         
     - name: setup dev area and checkout code
       run: |
-          pwd
-          ls $GITHUB_WORKSPACE
           export DBT_ROOT=$GITHUB_WORKSPACE/daq-buildtools
           source ${DBT_ROOT}/scripts/dbt-setup-tools.sh
           add_many_paths PATH ${DBT_ROOT}/bin ${DBT_ROOT}/scripts
@@ -58,10 +56,8 @@ jobs:
           cp $GITHUB_WORKSPACE/daq-release/configs/dunedaq-develop/release_manifest.sh .
           $GITHUB_WORKSPACE/daq-release/scripts/checkout-package.sh -f ./release_manifest.sh -a -b develop -o sourcecode
     
-    - name: setup build env
+    - name: setup build env and build the dev release
       run: |
-          pwd
-          printenv
           export DBT_ROOT=$GITHUB_WORKSPACE/daq-buildtools
           source ${DBT_ROOT}/scripts/dbt-setup-tools.sh
           add_many_paths PATH ${DBT_ROOT}/bin ${DBT_ROOT}/scripts
@@ -69,15 +65,9 @@ jobs:
           export DBT_AREA_ROOT=$PWD
           export DBT_AREA_FILE="dbt-settings"
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
-          echo "setup ups area dbt complete"
           setup_ups_product_areas || true
-          echo "setup ups products area complete"
-          which ups || true
           setup -B python ${dune_python_version} || true
-          echo "setup python complete"
           source ${DBT_AREA_ROOT}/${DBT_VENV}/bin/activate 
-          which python 
-          echo "activated python venv"
           setup_ups_products dune_devtools || true
           setup_ups_products dune_systems || true
           setup_ups_products dune_externals || true
@@ -85,10 +75,5 @@ jobs:
           export DBT_SETUP_BUILD_ENVIRONMENT_SCRIPT_SOURCED=1
           dbt-build.sh --install
           
-    - name: build the release
-      run: |     
-          cd $GITHUB_WORKSPACE/dev
-          dbt-build.sh --install
-
           
 
