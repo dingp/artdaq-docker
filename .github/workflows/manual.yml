@@ -53,10 +53,10 @@ jobs:
           add_many_paths PATH ${DBT_ROOT}/bin ${DBT_ROOT}/scripts
           dbt-create.sh -r $GITHUB_WORKSPACE/daq-release/configs dunedaq-develop dev
           cd dev
-          source ${DBT_ROOT}/scripts/dbt-setup-build-environment.sh
           $GITHUB_WORKSPACE/daq-release/scripts/checkout-package.sh \ 
           -f $GITHUB_WORKSPACE/daq-release/configs/dunedaq-develop/release_manifest.sh \
           -b develop -o sourcecode
+          source ${DBT_ROOT}/scripts/dbt-setup-build-environment.sh
           dbt-build.sh --install
 
           
