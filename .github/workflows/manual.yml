@@ -19,7 +19,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  checkout_test:
+  Build the develop release:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     container:
@@ -32,19 +32,19 @@ jobs:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
 
-    - name: Checkout
+    - name: Checkout daq-buildtools
       uses: actions/checkout@v2
       with:
         repository: DUNE-DAQ/daq-buildtools
         path: daq-buildtools
 
-    - name: Checkout tools repo
+    - name: Checkout daq-release
       uses: actions/checkout@v2
       with:
         repository: DUNE-DAQ/daq-release
         path: daq-release
         
-    - name: show path
+    - name: setup dev area and checkout code
       run: |
           pwd
           ls $GITHUB_WORKSPACE
@@ -55,6 +55,9 @@ jobs:
           cd dev
           cp $GITHUB_WORKSPACE/daq-release/configs/dunedaq-develop/release_manifest.sh .
           $GITHUB_WORKSPACE/daq-release/scripts/checkout-package.sh -f ./release_manifest.sh -a -b develop -o sourcecode
+    
+    - name: setup build env
+      run: |    
           export DBT_AREA_ROOT=$PWD
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
           setup_ups_product_areas
@@ -68,6 +71,9 @@ jobs:
           setup_ups_products dune_externals
           export DBT_INSTALL_DIR=${DBT_AREA_ROOT}/install
           export DBT_SETUP_BUILD_ENVIRONMENT_SCRIPT_SOURCED=1
+          
+    - name: build the release
+      run: |            
           dbt-build.sh --install
 
           
