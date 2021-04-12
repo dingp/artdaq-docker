@@ -59,6 +59,7 @@ jobs:
     - name: setup build env
       run: |    
           export DBT_AREA_ROOT=$PWD
+          export DBT_AREA_FILE="dbt-settings"
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
           echo "setup ups area dbt complete"
           setup_ups_product_areas
