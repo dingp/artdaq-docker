@@ -57,7 +57,8 @@ jobs:
           $GITHUB_WORKSPACE/daq-release/scripts/checkout-package.sh -f ./release_manifest.sh -a -b develop -o sourcecode
     
     - name: setup build env
-      run: |    
+      run: |
+          cd $GITHUB_WORKSPACE/dev
           export DBT_AREA_ROOT=$PWD
           export DBT_AREA_FILE="dbt-settings"
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
