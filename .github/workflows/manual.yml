@@ -47,25 +47,3 @@ jobs:
           pwd
           echo $GITHUB_WORKSPACE
           tree $GITHUB_WORKSPACE
-
-
-
-
-
-
-
-
-
-
-  uses: actions/checkout@v2
-  with:
-    path: main
-
-- name: Checkout tools repo
-  uses: actions/checkout@v2
-  with:
-    repository: my-org/my-tools
-    path: my-tools
-      
-      
-      
