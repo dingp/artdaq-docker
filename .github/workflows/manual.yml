@@ -55,8 +55,10 @@ jobs:
           cd dev
           cp $GITHUB_WORKSPACE/daq-release/configs/dunedaq-develop/release_manifest.sh .
           $GITHUB_WORKSPACE/daq-release/scripts/checkout-package.sh -f ./release_manifest.sh -a -b develop -o sourcecode
+          echo "checkout complete"
           export DBT_AREA_ROOT=$PWD
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
+          echo "source dbt complete"
           setup_ups_product_areas
           setup python ${dune_python_version}
           source ${DBT_AREA_ROOT}/${DBT_VENV}/bin/activate
