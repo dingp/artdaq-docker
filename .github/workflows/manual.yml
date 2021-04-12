@@ -55,7 +55,7 @@ jobs:
           cd dev
           cp $GITHUB_WORKSPACE/daq-release/configs/dunedaq-develop/release_manifest.sh .
           $GITHUB_WORKSPACE/daq-release/scripts/checkout-package.sh \ 
-          -f ./release_manifest.sh -b develop -o sourcecode
+          -f ./release_manifest.sh -a -b develop -o sourcecode
           export DBT_AREA_ROOT=$PWD
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
           setup_ups_product_areas
