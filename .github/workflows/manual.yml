@@ -46,6 +46,7 @@ jobs:
         
     - name: show path
       run: |
+         /bin/bash
           pwd
           ls $GITHUB_WORKSPACE
           source $GITHUB_WORKSPACE/daq-buildtools/dbt-setup-env.sh
