@@ -60,8 +60,8 @@ jobs:
       run: |    
           export DBT_AREA_ROOT=$PWD
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
-          setup_ups_product_areas
           echo "setup ups area dbt complete"
+          setup_ups_product_areas
           setup python ${dune_python_version}
           echo "setup python complete"
           source ${DBT_AREA_ROOT}/${DBT_VENV}/bin/activate
