@@ -41,8 +41,9 @@ jobs:
         
     - name: setup dev area and checkout code
       run: |
-        echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')"
-        echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+        echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')"
+        echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
         echo $GITHUB_ENV
+        cat $GITHUB_ENV
         printenv
         
