@@ -70,9 +70,9 @@ jobs:
           export DBT_AREA_FILE="dbt-settings"
           source ${DBT_AREA_ROOT}/${DBT_AREA_FILE}
           echo "setup ups area dbt complete"
-          setup_ups_product_areas
+          setup_ups_product_areas || true
           echo "setup ups products area complete"
-          setup python ${dune_python_version}
+          setup -B python ${dune_python_version}
           echo "setup python complete"
           source ${DBT_AREA_ROOT}/${DBT_VENV}/bin/activate
           echo "activated python venv"
