@@ -72,13 +72,15 @@ jobs:
           echo "setup ups area dbt complete"
           setup_ups_product_areas || true
           echo "setup ups products area complete"
-          setup -B python ${dune_python_version}
+          which ups || true
+          setup -B python ${dune_python_version} || true
           echo "setup python complete"
-          source ${DBT_AREA_ROOT}/${DBT_VENV}/bin/activate
+          source ${DBT_AREA_ROOT}/${DBT_VENV}/bin/activate 
+          which python 
           echo "activated python venv"
-          setup_ups_products dune_devtools
-          setup_ups_products dune_systems
-          setup_ups_products dune_externals
+          setup_ups_products dune_devtools || true
+          setup_ups_products dune_systems || true
+          setup_ups_products dune_externals || true
           export DBT_INSTALL_DIR=${DBT_AREA_ROOT}/install
           export DBT_SETUP_BUILD_ENVIRONMENT_SCRIPT_SOURCED=1
           dbt-build.sh --install
