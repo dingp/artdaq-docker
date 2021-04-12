@@ -25,7 +25,6 @@ jobs:
     container:
       image: dunedaq/sl7-minimal:dev
     env:
-      DBT_ROOT: ${{env.GITHUB_WORKSPACE}}/daq-buildtools
       DBT_AREA_FILE: "dbt-settings"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -51,6 +50,7 @@ jobs:
       run: |
           pwd
           ls $GITHUB_WORKSPACE
+          export DBT_ROOT=$GITHUB_WORKSPACE/daq-buildtools
           source ${DBT_ROOT}/scripts/dbt-setup-tools.sh
           add_many_paths PATH ${DBT_ROOT}/bin ${DBT_ROOT}/scripts
           dbt-create.sh -r $GITHUB_WORKSPACE/daq-release/configs dunedaq-develop dev
@@ -62,6 +62,7 @@ jobs:
       run: |
           pwd
           printenv
+          export DBT_ROOT=$GITHUB_WORKSPACE/daq-buildtools
           source ${DBT_ROOT}/scripts/dbt-setup-tools.sh
           add_many_paths PATH ${DBT_ROOT}/bin ${DBT_ROOT}/scripts
           cd $GITHUB_WORKSPACE/dev
